@@ -7,8 +7,7 @@ using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
-using PoGo.NecroBot.Logic.Logging;
-using PoGo.NecroBot.Logic.Common;
+using POGOProtos.Data;
 
 #endregion
 
@@ -28,10 +27,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                         session.LogicSettings.KeepPokemonsThatCanEvolve,
                         session.LogicSettings.PrioritizeIvOverCp);
 
+            var orderedPokemon = duplicatePokemons.OrderBy( poke => poke.Cp );
+
             var pokemonSettings = await session.Inventory.GetPokemonSettings();
             var pokemonFamilies = await session.Inventory.GetPokemonFamilies();
 
-            foreach (var duplicatePokemon in duplicatePokemons)
+            foreach (var duplicatePokemon in orderedPokemon)
             {
                 cancellationToken.ThrowIfCancellationRequested();
 

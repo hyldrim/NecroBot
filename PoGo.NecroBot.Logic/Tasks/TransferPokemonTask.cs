@@ -1,14 +1,9 @@
 ﻿#region using directives
 
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using PoGo.NecroBot.Logic.Event;
-using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
-using PoGo.NecroBot.Logic.Logging;
-using PoGo.NecroBot.Logic.Common;
 
 #endregion
 
@@ -19,7 +14,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static async Task Execute(ISession session, ulong pokemonId)
         {
             var all = await session.Inventory.GetPokemons();
-            var pokemons = all.OrderByDescending(x => x.Cp).ThenBy(n => n.StaminaMax);
+            var pokemons = all.OrderBy(x => x.Cp).ThenBy(n => n.StaminaMax);
             var pokemon = pokemons.FirstOrDefault(p => p.Id == pokemonId);
 
             if (pokemon == null) return;

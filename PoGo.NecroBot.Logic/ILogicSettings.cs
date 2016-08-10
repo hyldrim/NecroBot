@@ -1,4 +1,4 @@
-﻿#region using directives
+#region using directives
 
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
@@ -71,6 +71,8 @@ namespace PoGo.NecroBot.Logic
 
     public interface ILogicSettings
     {
+        bool UseWebsocket { get; }
+        bool CatchPokemon { get; }
         bool TransferWeakPokemon { get; }
         bool DisableHumanWalking { get; }
         bool AutoUpdate { get; }
@@ -81,6 +83,7 @@ namespace PoGo.NecroBot.Logic
         bool UseKeepMinLvl { get; }
         string KeepMinOperator { get; }
         double WalkingSpeedInKilometerPerHour { get; }
+        bool FastSoftBanBypass { get; }
         bool EvolveAllPokemonWithEnoughCandy { get; }
         bool KeepPokemonsThatCanEvolve { get; }
         bool TransferDuplicatePokemon { get; }
@@ -106,6 +109,8 @@ namespace PoGo.NecroBot.Logic
 
         int DelayBetweenPokemonCatch { get; }
         bool AutomaticallyLevelUpPokemon { get; }
+        bool OnlyUpgradeFavorites { get; }
+        bool UseLevelUpList { get; }
         string LevelUpByCPorIv { get; }
         float UpgradePokemonCpMinimum { get; }
         float UpgradePokemonIvMinimum { get; }
@@ -118,6 +123,7 @@ namespace PoGo.NecroBot.Logic
 
         int GetMinStarDustForLevelUp { get; }
         bool UseLuckyEggConstantly { get; }
+        int MaxBerriesToUsePerPokemon { get; }
         bool UseIncenseConstantly { get; }
         int UseBerriesMinCp { get; }
         float UseBerriesMinIv { get; }
@@ -143,6 +149,8 @@ namespace PoGo.NecroBot.Logic
         string ProfileConfigPath { get; }
         string GeneralConfigPath { get; }
         bool SnipeAtPokestops { get; }
+        bool UseTelegramAPI { get; }
+        string TelegramAPIKey { get; }
         int MinPokeballsToSnipe { get; }
         int MinPokeballsWhileSnipe { get; }
         int MaxPokeballsPerPokemon { get; }
@@ -150,24 +158,31 @@ namespace PoGo.NecroBot.Logic
         int SnipeLocationServerPort { get; }
         bool GetSniperInfoFromPokezz { get; }
         bool GetOnlyVerifiedSniperInfoFromPokezz { get; }
+        bool GetSniperInfoFromPokeSnipers { get; }
+        bool GetSniperInfoFromPokeWatchers { get; }
+        bool SnipeWithSkiplagged { get; }
         bool UseSnipeLocationServer { get; }
-        bool UseSnipeOnlineLocationServer { get; }
         bool UseTransferIvForSnipe { get; }
         bool SnipeIgnoreUnknownIv { get; }
         int MinDelayBetweenSnipes { get; }
         double SnipingScanOffset { get; }
+        bool SnipePokemonNotInPokedex { get; }
+        bool RandomizeRecycle { get; }
+        int RandomRecycleValue { get; }
+        bool DelayBetweenRecycleActions { get; }
         int TotalAmountOfPokeballsToKeep { get; }
         int TotalAmountOfPotionsToKeep { get; }
         int TotalAmountOfRevivesToKeep { get; }
         int TotalAmountOfBerriesToKeep { get; }
 
-        bool ShowPokeballCountsBeforeRecycle { get; }
+        bool DetailedCountsBeforeRecycling { get; }
         bool VerboseRecycling { get; }
         double RecycleInventoryAtUsagePercentage { get; }
         double EvolveKeptPokemonsAtStorageUsagePercentage { get; }
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }
+        ICollection<PokemonId> PokemonsToLevelUp { get; }
 
         ICollection<PokemonId> PokemonsNotToTransfer { get; }
 
